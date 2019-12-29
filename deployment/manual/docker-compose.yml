@@ -1,0 +1,50 @@
+version: "2.4"
+
+services:
+  promena-master:
+    image: promena-file-http-executable:1.0.0
+    mem_limit: 2g
+    ports:
+      - 8090:8080
+    environment:
+      - akka.remote.netty.tcp.hostname=promena-master
+      - akka.cluster.seed-nodes.0=akka.tcp://Promena@promena-master:2552
+      - communication.file.internal.directory.path=/tmp/promena-communication
+    # Only for demonstration purpose to ensure the starting order (master must be run first)
+    # It depends on http-connector port (not for production)
+    volumes:
+      - promena-communication:/tmp/promena-communication
+    healthcheck:
+      test: ["CMD", "curl", "-I", "http://localhost:8080"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  promena-worker:
+    image: promena-file-http-executable:1.0.0
+    mem_limit: 2g
+    environment:
+      - akka.remote.netty.tcp.hostname=promena-worker
+      - akka.cluster.seed-nodes.0=akka.tcp://Promena@promena-master:2552
+      - communication.file.internal.directory.path=/tmp/promena-communication
+    volumes:
+      - promena-communication:/tmp/promena-communication
+    depends_on:
+      promena-master:
+        condition: service_healthy
+
+  promena-worker2:
+    image: promena-file-http-executable:1.0.0
+    mem_limit: 2g
+    environment:
+      - akka.remote.netty.tcp.hostname=promena-worker2
+      - akka.cluster.seed-nodes.0=akka.tcp://Promena@promena-master:2552
+      - communication.file.internal.directory.path=/tmp/promena-communication
+    volumes:
+      - promena-communication:/tmp/promena-communication
+    depends_on:
+      promena-master:
+        condition: service_healthy
+
+volumes:
+  promena-communication:
