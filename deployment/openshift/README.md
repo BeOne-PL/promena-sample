@@ -1,1 +1,0 @@
-oc apply -f deployment-config.yaml
