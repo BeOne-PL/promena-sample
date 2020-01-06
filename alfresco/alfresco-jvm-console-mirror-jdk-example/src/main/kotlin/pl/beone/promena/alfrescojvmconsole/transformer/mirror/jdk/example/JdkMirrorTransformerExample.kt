@@ -23,7 +23,7 @@ class JdkMirrorTransformerExample {
 
     @Autowired
 //    @Qualifier("httpPromenaTransformationExecutor")
-    @Qualifier("activeMQPromenaTransformationExecutor")
+//    @Qualifier("activeMQPromenaTransformationExecutor")
     private lateinit var promenaTransformationExecutor: PromenaTransformationExecutor
 
     @Autowired
