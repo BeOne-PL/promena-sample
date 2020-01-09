@@ -120,3 +120,17 @@ transformer.pl.beone.promena.transformer.converter.imagemagick.ImageMagickConver
 
 They use [`promena-file-activemq-predefined-rendition`](./image/promena-file-activemq-predefined-rendition) Promena image with [`promena-connector-activemq`](https://gitlab.office.beone.pl/promena/promena-alfresco/tree/master/connector/alfresco-promena-connector-activemq) connector module and [`promena-communication-file`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/communication/file) communication module that were described in one of the previous sections, [`converter-libreoffice`](https://gitlab.office.beone.pl/promena/promena-transformer-converter-libreoffice) and [`converter-imagemagick`](https://gitlab.office.beone.pl/promena/promena-transformer-converter-imagemagick) transformers for renditions.
 
+## Constructing transformation
+A transformation can be constructed in two ways:
+* Without any dependency:
+```kotlin
+fun transformation(): Transformation =
+    singleTransformation("mirror", TEXT_PLAIN, emptyParameters() + ("sleep" to 2000)) next
+            singleTransformation("mirror", TEXT_PLAIN, emptyParameters() + ("sleep" to 3000))
+```
+* With `application-model` dependency of the specific transformer (less loose coupling):
+```kotlin
+fun transformation(): Transformation =
+    jdkMirrorTransformation(TEXT_PLAIN, jdkMirrorParameters(sleep = 2000)) next
+            jdkMirrorTransformation(TEXT_PLAIN, jdkMirrorParameters(sleep = 3000))
+```
