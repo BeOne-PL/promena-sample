@@ -120,6 +120,9 @@ transformer.pl.beone.promena.transformer.converter.imagemagick.ImageMagickConver
 
 They use [`promena-file-activemq-predefined-rendition`](./image/promena-file-activemq-predefined-rendition) Promena image with [`promena-connector-activemq`](https://gitlab.office.beone.pl/promena/promena-alfresco/tree/master/connector/alfresco-promena-connector-activemq) connector module and [`promena-communication-file`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/communication/file) communication module that were described in one of the previous sections, [`converter-libreoffice`](https://gitlab.office.beone.pl/promena/promena-transformer-converter-libreoffice) and [`converter-imagemagick`](https://gitlab.office.beone.pl/promena/promena-transformer-converter-imagemagick) transformers for renditions.
 
+## Image
+Folder [`image`](./image) contains several examples of projects that provide Promena Docker image for this guide. Open their `pom.xml` files to see some inclusions of modules and transformers.
+
 ## Constructing transformation
 A transformation can be constructed in two ways:
 * Without any dependency:
