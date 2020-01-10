@@ -1,10 +1,10 @@
 # Promena Sample
 All Promena images use [`mirror-jdk`](./transformer/mirror-jdk) transformer and [`promena-connector-http`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/connector/activemq) connector module. 
-You can perform a transformation in any sample using [Promena IntelliJ plugin](https://gitlab.office.beone.pl/promena/promena) on [`mirror-jdk/example`](./transformer/mirror-jdk/example) (it contains examples in Java and Kotlin).
+You can perform a transformation in any sample using [Promena#IntelliJ plugin](https://gitlab.office.beone.pl/promena/promena#intellij-plugin) on [`mirror-jdk/example`](./transformer/mirror-jdk/example) (it contains the examples in Java and Kotlin).
 
 ## Deployment
 ### [Manual](./deployment/manual)
-This deployment shows how to run Promena in a cluster without `Kubernetes` or `OpenShift`. It means that you have to specify `akka.cluster.seed-nodes` property manually (see [Joining to Seed Nodes](https://doc.akka.io/docs/akka/2.5.26/cluster-usage.html#joining-to-seed-nodes) for more details). The seed node has to start first. It is done waiting for the seed node `promena-connector-http` connector module to be run by the workers nodes. It is only for demonstration purposes and shouldn't be used in production. 
+This deployment shows how to run Promena in a cluster without `Kubernetes` or `OpenShift`. It means that you have to specify `akka.cluster.seed-nodes` property manually (see [Joining to Seed Nodes](https://doc.akka.io/docs/akka/2.5.26/cluster-usage.html#joining-to-seed-nodes) for more details). The seed node has to start first. It is done by waiting for the seed node `promena-connector-http` connector module to be run by the worker nodes. It is only for demonstration purposes and shouldn't be used in production. 
 
 This sample uses [`promena-file-http`](./image/promena-file-http) Promena image with [`promena-connector-http`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/connector/activemq) connector module. It also demonstrates how to set [`promena-communication-file`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/communication/file) communication module - `communication.file.internal.directory.path` (see [`docker-compose.yml`](./deployment/manual/docker-compose.yml)) property indicates the same location in the volume that is mounted on all Promena nodes.
 
@@ -17,7 +17,7 @@ Generally, they have common elements. The only difference is that [Kubernetes](.
 
 Unlike [Manual](./deployment/manual), you don't have to specify seed nodes manually. This kind of deployment uses [`promena-cluster-management-kubernetes`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/cluster/management/kubernetes) module - it chooses leader dynamically and you don't have to worry.
 
- These samples use [`promena-file-http-kubernetes`](./image/promena-file-http-kubernetes) Promena image with [`promena-connector-http`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/connector/activemq) connector module and [`promena-cluster-management-kubernetes`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/cluster/management/kubernetes) module. It also demonstrates how to set [`promena-communication-file`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/communication/file) communication module but it is based on the local volume. If your cluster contains more than one node you have to provide a volume that is available on all nodes.
+ These samples use [`promena-file-http-kubernetes`](./image/promena-file-http-kubernetes) Promena image with [`promena-connector-http`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/connector/activemq) connector module and [`promena-cluster-management-kubernetes`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/cluster/management/kubernetes) module. It also demonstrates how to set [`promena-communication-file`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/communication/file) communication module but it is based on the local volume. If your cluster contains more than one node you have to provide a volume that is accessible on all nodes.
  
 #### Kubernetes
 ```
@@ -44,7 +44,7 @@ oc apply -f service.yaml
 ## Transformer
 You can generate the template of a transformer using archetype (see [Promena - Development Guide](https://gitlab.office.beone.pl/promena/promena/blob/master/DEVELOPMENT-GUIDE.md) for more details). 
 
-[`appender-jdk-generic`](./transformer/appender-jdk-general) demonstrates the common case when you don't want to deal with the specific communication implementation. See [`Processor`](./transformer/appender-jdk-general/implementation/src/main/kotlin/pl/beone/promena/transformer/appender/jdkgeneral/processor/Processor.kt).
+[`appender-jdk-generic`](./transformer/appender-jdk-general) demonstrates the common case when you don't want to deal with specific communication implementation. See [`Processor`](./transformer/appender-jdk-general/implementation/src/main/kotlin/pl/beone/promena/transformer/appender/jdkgeneral/processor/Processor.kt).
 
 [`appender-jdk-specific`](./transformer/appender-jdk-specific) demonstrates how to deal with specific communication. For example, for [`promena-communication-file`](https://gitlab.office.beone.pl/promena/promena/tree/master/module/communication/file) communication module, it operates directly on the file. See [`Processor`](./transformer/appender-jdk-specific/implementation/src/main/kotlin/pl/beone/promena/transformer/appender/jdkspecific/processor/Processor.kt).
 
@@ -56,7 +56,7 @@ You can generate the template of a module using archetype (see [Promena - Develo
 * How to use Cluster Metrics Extension - [`MetricsClusterListener`](./module/promena-cluster-listener/internal/src/main/kotlin/pl/beone/promena/cluster/listener/MetricsClusterListener.kt), [`module-promena-cluster-listener.properties`](./module/promena-cluster-listener/configuration/src/main/resources/module-promena-cluster-listener.properties)
 
 ## Alfresco
-These samples demonstrate how integrate Alfresco with Promena. This folder also contains [`alfresco-jvm-console-mirror-jdk-example`](./alfresco/alfresco-jvm-console-mirror-jdk-example) that allows you to perform a transformation using Promena API in Alfresco dynamically. It requires [Alfresco JVM Console - IntelliJ plugin](https://github.com/Skotar/alfresco-jvm-console).
+These samples demonstrate how to integrate Alfresco with Promena. This folder also contains [`alfresco-jvm-console-mirror-jdk-example`](./alfresco/alfresco-jvm-console-mirror-jdk-example) that allows you to perform a transformation using Promena using Alfresco dynamically. It requires [Alfresco JVM Console - IntelliJ plugin](https://github.com/Skotar/alfresco-jvm-console).
 
 Visit [Promena Alfresco](https://gitlab.office.beone.pl/promena/promena-alfresco) for more details about modules.
 
@@ -103,9 +103,9 @@ spring.activemq.broker-url=failover:(nio://activemq:61616)?timeout=3000&jms.useC
 Each connector provides its own [`PromenaTransformationExecutor`](https://gitlab.office.beone.pl/promena/promena-alfresco/blob/master/alfresco-promena-core/src/main/kotlin/pl/beone/promena/alfresco/module/core/contract/transformation/PromenaTransformationExecutor.kt) implementation so if you want to inject a bean, you have to specify one of them.
 
 ### Rendition
-There are two samples - the first one for Alfresco Content Services 6.1.2 ([`predefined-rendition_6.1.2`](./alfresco/rendition/predefined-rendition_6.1.2) module) and the second one for Alfresco Content Services 6.2.0 ([`predefined-rendition_6.2.0`](./alfresco/rendition/predefined-rendition_6.2.0) module). They do exactly the same thing - replace standard Alfresco rendition system with the equivalent in Promena environment. This functionality is provided by [`alfresco-promena-rendition_6.1.2`](https://gitlab.office.beone.pl/promena/promena-alfresco/master/rendition/rendition/alfresco-promena-rendition_6.1.2) and [`alfresco-promena-rendition_6.2.0`](https://gitlab.office.beone.pl/promena/promena-alfresco/master/rendition/rendition/alfresco-promena-rendition_6.2.0) modules.
+There are two samples - the first one for Alfresco Content Services 6.1.2 ([`predefined-rendition_6.1.2`](./alfresco/rendition/predefined-rendition_6.1.2) module) and the second one for Alfresco Content Services 6.2.0 ([`predefined-rendition_6.2.0`](./alfresco/rendition/predefined-rendition_6.2.0) module). They do exactly the same thing - replace the standard Alfresco rendition system with the equivalent in Promena environment. This functionality is provided by [`alfresco-promena-rendition_6.1.2`](https://gitlab.office.beone.pl/promena/promena-alfresco/tree/master/rendition/alfresco-promena-rendition_6.1.2) and [`alfresco-promena-rendition_6.2.0`](https://gitlab.office.beone.pl/promena/promena-alfresco/tree/master/rendition/alfresco-promena-rendition_6.2.0) modules.
 
-Additionally, they use [`alfresco-promena-predefined-rendition`](https://gitlab.office.beone.pl/promena/promena-alfresco/master/rendition/rendition/alfresco-promena-predefined-rendition) module to provide `avatar32`, `avatar`, `imgpreview`, `doclib`, `medium` and `pdf` renditions (see [Promena Alfresco - Development Guide](https://gitlab.office.beone.pl/promena/promena-alfresco/blob/master/DEVELOPMENT-GUIDE.md) to find out how to write own rendition). If you want to check how it works, just upload a document to the repository using Alfresco Share.
+Additionally, they use [`alfresco-promena-predefined-rendition`](https://gitlab.office.beone.pl/promena/promena-alfresco/tree/master/rendition/alfresco-promena-predefined-rendition) module to provide `avatar32`, `avatar`, `imgpreview`, `doclib`, `medium` and `pdf` renditions (see [Promena Alfresco - Development Guide](https://gitlab.office.beone.pl/promena/promena-alfresco/blob/master/DEVELOPMENT-GUIDE.md) to find out how to write own rendition). If you want to check how it works, just upload a document to the repository using Alfresco Share.
 
 These samples also demonstrate how to increase concurrency level within a single instance. On Alfresco Content Services side, you have to increase the concurrency level of a connector. In case of ActiveMQ, set in `alfresco-global.properties`:
 ```properties
