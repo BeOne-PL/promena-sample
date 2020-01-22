@@ -9,6 +9,7 @@ import org.alfresco.service.namespace.QName
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import pl.beone.promena.alfresco.module.core.applicationmodel.node.toSingleNodeDescriptor
+import pl.beone.promena.alfresco.module.core.applicationmodel.retry.customRetry
 import pl.beone.promena.alfresco.module.core.applicationmodel.retry.noRetry
 import pl.beone.promena.alfresco.module.core.contract.transformation.PromenaTransformationExecutor
 import pl.beone.promena.alfresco.module.core.contract.transformation.PromenaTransformationManager
@@ -17,6 +18,7 @@ import pl.beone.promena.transformer.applicationmodel.mediatype.MediaTypeConstant
 import pl.beone.promena.transformer.contract.model.Parameters
 import pl.beone.promena.transformer.mirror.jdk.applicationmodel.jdkMirrorParameters
 import pl.beone.promena.transformer.mirror.jdk.applicationmodel.jdkMirrorTransformation
+import java.time.Duration
 import java.time.LocalDateTime
 
 class JdkMirrorTransformerExample {
@@ -45,7 +47,7 @@ class JdkMirrorTransformerExample {
         promenaTransformationExecutor.execute(
             jdkMirrorTransformation(TEXT_PLAIN, parameters),
             createNodeWithExampleContentInNewTransaction().toSingleNodeDescriptor(),
-            retry = noRetry()
+            retry = customRetry(1, Duration.ofSeconds(3))
         ).let { promenaTransformationManager.getResult(it).nodeRefs }
 
     private fun createNodeWithExampleContentInNewTransaction(): NodeRef =
