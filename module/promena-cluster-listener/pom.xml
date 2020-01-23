@@ -15,7 +15,7 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>[SAMPLE][MODULE] Cluster listener</name>
+    <name>pl.beone.promena.cluster:promena-cluster-listener</name>
 
     <modules>
         <module>internal</module>

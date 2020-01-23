@@ -8,7 +8,7 @@
     <artifactId>alfresco-jvm-console-mirror-jdk-example</artifactId>
     <version>1.0.0</version>
 
-    <name>[SAMPLE][ALFRESCO JVM CONSOLE] Mirror - JDK - example</name>
+    <name>pl.beone.promena.alfresco.transformer:alfresco-jvm-console-mirror-jdk-example</name>
 
     <repositories>
         <repository>

@@ -9,7 +9,7 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>[SAMPLE][TRANSFORMER] Appender - JDK specific</name>
+    <name>pl.beone.promena.transformer:appender-jdk-specific-root</name>
 
     <modules>
         <module>application-model</module>
