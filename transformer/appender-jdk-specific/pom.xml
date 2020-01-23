@@ -7,6 +7,7 @@
     <groupId>pl.beone.promena.transformer</groupId>
     <artifactId>appender-jdk-specific-root</artifactId>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
 
     <name>[SAMPLE][TRANSFORMER] Appender - JDK specific</name>
 
@@ -16,6 +17,5 @@
         <module>example</module>
         <module>configuration</module>
     </modules>
-    <packaging>pom</packaging>
 
 </project>
