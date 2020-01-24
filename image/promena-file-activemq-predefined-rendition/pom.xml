@@ -32,7 +32,7 @@
 
         <!-- Put TRANSFORMERS versions here -->
         <converter-imagemagick.version>1.0.0</converter-imagemagick.version>
-        <converter-libreoffice.version>1.0.0</converter-libreoffice.version>
+        <converter-libreoffice.version>1.0.1</converter-libreoffice.version>
         <!-- /Put -->
 
         <promena-docker-maven-plugin.version>1.0.0</promena-docker-maven-plugin.version>
