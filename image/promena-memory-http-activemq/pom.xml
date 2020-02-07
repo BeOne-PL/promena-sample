@@ -29,7 +29,7 @@
         <promena-communication-memory-internal.version>1.0.0</promena-communication-memory-internal.version>
 
         <promena-connector-http.version>1.0.0</promena-connector-http.version>
-        <promena-connector-activemq.version>1.0.0</promena-connector-activemq.version>
+        <promena-connector-activemq.version>1.0.1</promena-connector-activemq.version>
 
         <!-- Put TRANSFORMERS versions here -->
         <mirror-jdk-transformer.version>1.0.0</mirror-jdk-transformer.version>

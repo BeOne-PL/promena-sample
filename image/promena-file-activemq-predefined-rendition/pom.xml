@@ -28,7 +28,7 @@
         <promena-communication-file-external.version>1.0.0</promena-communication-file-external.version>
         <promena-communication-file-internal.version>1.0.0</promena-communication-file-internal.version>
 
-        <promena-connector-activemq.version>1.0.0</promena-connector-activemq.version>
+        <promena-connector-activemq.version>1.0.1</promena-connector-activemq.version>
 
         <!-- Put TRANSFORMERS versions here -->
         <converter-imagemagick.version>1.0.0</converter-imagemagick.version>
