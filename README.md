@@ -44,7 +44,7 @@ oc apply -f service.yaml
 ## Transformer
 You can generate the template of a transformer using archetype (see [Promena - Development Guide](https://github.com/BeOne-PL/promena/blob/master/DEVELOPMENT-GUIDE.md) for more details). 
 
-[`appender-jdk-generic`](./transformer/appender-jdk-general) demonstrates the common case when you don't want to deal with specific communication implementation. See [`Processor`](./transformer/appender-jdk-general/implementation/src/main/kotlin/pl/beone/promena/transformer/appender/jdkgeneral/processor/Processor.kt).
+[`appender-jdk-general`](./transformer/appender-jdk-general) demonstrates the common case when you don't want to deal with specific communication implementation. See [`Processor`](./transformer/appender-jdk-general/implementation/src/main/kotlin/pl/beone/promena/transformer/appender/jdkgeneral/processor/Processor.kt).
 
 [`appender-jdk-specific`](./transformer/appender-jdk-specific) demonstrates how to deal with specific communication. For example, for [`promena-communication-file`](https://github.com/BeOne-PL/promena/tree/master/module/communication/file) communication module, it operates directly on the file. See [`Processor`](./transformer/appender-jdk-specific/implementation/src/main/kotlin/pl/beone/promena/transformer/appender/jdkspecific/processor/Processor.kt).
 
@@ -102,10 +102,14 @@ spring.activemq.broker-url=failover:(nio://activemq:61616)?timeout=3000&jms.useC
 
 Each connector provides its own [`PromenaTransformationExecutor`](https://github.com/BeOne-PL/promena-alfresco/blob/master/alfresco-promena-core/src/main/kotlin/pl/beone/promena/alfresco/module/core/contract/transformation/PromenaTransformationExecutor.kt) implementation so if you want to inject a bean, you have to specify one of them.
 
-### Rendition
-There are two samples - the first one for Alfresco Content Services 6.1.2 ([`predefined-rendition_6.1.2`](./alfresco/rendition/predefined-rendition_6.1.2) module) and the second one for Alfresco Content Services 6.2.0 ([`predefined-rendition_6.2.0`](./alfresco/rendition/predefined-rendition_6.2.0) module). They do exactly the same thing - replace the standard Alfresco rendition system with the equivalent in Promena environment. This functionality is provided by [`alfresco-promena-rendition_6.1.2`](https://github.com/BeOne-PL/promena-alfresco/tree/master/rendition/alfresco-promena-rendition_6.1.2) and [`alfresco-promena-rendition_6.2.0`](https://github.com/BeOne-PL/promena-alfresco/tree/master/rendition/alfresco-promena-rendition_6.2.0) modules.
+### Transformer & Rendition
+There are two samples - the first one for Alfresco Content Services 6.1.2 ([`transformer-rendition-predefined_6.1.2`](./alfresco/transformer-rendition/transformer-rendition-predefined_6.1.2) module) and the second one for Alfresco Content Services 6.2.0 ([`transformer-rendition-predefined_6.2.0`](./alfresco/transformer-rendition/transformer-rendition-predefined_6.2.0) module). They do exactly the same thing - replace the standard Alfresco Transformer and Rendition system with the equivalent in Promena environment. This functionality is provided by [`alfresco-promena-transformer-rendition_6.1.2`](https://github.com/BeOne-PL/promena-alfresco/tree/master/transformer-rendition/alfresco-promena-transformer-rendition_6.1.2) and [`alfresco-promena-transformer-rendition_6.2.0`](https://github.com/BeOne-PL/promena-alfresco/tree/master/transformer-rendition/alfresco-promena-transformer-rendition_6.2.0) modules.
 
-Additionally, they use [`alfresco-promena-predefined-rendition`](https://github.com/BeOne-PL/promena-alfresco/tree/master/rendition/alfresco-promena-predefined-rendition) module to provide `avatar32`, `avatar`, `imgpreview`, `doclib`, `medium` and `pdf` renditions (see [Promena Alfresco - Development Guide](https://github.com/BeOne-PL/promena-alfresco/blob/master/DEVELOPMENT-GUIDE.md) to find out how to write own rendition). If you want to check how it works, just upload a document to the repository using Alfresco Share.
+Additionally, they use [`alfresco-promena-predefined-rendition`](https://github.com/BeOne-PL/promena-alfresco/tree/master/transformer-rendition/alfresco-promena-transformer-rendition-predefined) module to provide:
+* Rendition - `avatar32`, `avatar`, `imgpreview`, `doclib`, `medium` and `pdf` (see [Promena Alfresco - Development Guide#Definition/Rendition](https://github.com/BeOne-PL/promena-alfresco/blob/master/DEVELOPMENT-GUIDE.md#rendition) to find out how to write own rendition)
+* Content Transformer - conversion between various document formats (see [Promena Alfresco - Development Guide#Definition/Content Transformer](https://github.com/BeOne-PL/promena-alfresco/blob/master/DEVELOPMENT-GUIDE.md#content-transformer) to find out how to write own content transformer)
+
+If you want to check how it works, just upload a document to the repository using Alfresco Share (for renditions) and wait for Solr to index documents (content transformer).
 
 These samples also demonstrate how to increase concurrency level within a single instance. On Alfresco Content Services side, you have to increase the concurrency level of a connector. In case of ActiveMQ, set in `alfresco-global.properties`:
 ```properties
@@ -118,7 +122,7 @@ transformer.pl.beone.promena.transformer.converter.libreoffice.LibreOfficeConver
 transformer.pl.beone.promena.transformer.converter.imagemagick.ImageMagickConverterTransformer.actors=4
 ```
 
-They use [`promena-file-activemq-predefined-rendition`](./image/promena-file-activemq-predefined-rendition) Promena image with [`promena-connector-activemq`](https://github.com/BeOne-PL/promena-alfresco/tree/master/connector/alfresco-promena-connector-activemq) connector module and [`promena-communication-file`](https://github.com/BeOne-PL/promena/tree/master/module/communication/file) communication module that were described in one of the previous sections, [`converter-libreoffice`](https://github.com/BeOne-PL/promena-transformer-converter-libreoffice) and [`converter-imagemagick`](https://github.com/BeOne-PL/promena-transformer-converter-imagemagick) transformers for renditions.
+They use [`promena-file-activemq-transformer-rendition-predefined`](./image/promena-file-activemq-transformer-rendition-predefined) Promena image with [`promena-connector-activemq`](https://github.com/BeOne-PL/promena-alfresco/tree/master/connector/alfresco-promena-connector-activemq) connector module and [`promena-communication-file`](https://github.com/BeOne-PL/promena/tree/master/module/communication/file) communication module that were described in one of the previous sections, [`converter-libreoffice`](https://github.com/BeOne-PL/promena-transformer-converter-libreoffice), [`converter-imagemagick`](https://github.com/BeOne-PL/promena-transformer-converter-imagemagick) and [`converter-pdfbox`](https://github.com/BeOne-PL/promena-transformer-converter-pdfbox) transformers.
 
 ## Image
 Folder [`image`](./image) contains several examples of projects that provide Promena Docker image for this guide. Open their `pom.xml` files to see some inclusions of modules and transformers.

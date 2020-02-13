@@ -13,7 +13,7 @@
     </parent>
 
     <groupId>pl.beone.promena.executable</groupId>
-    <artifactId>promena-file-activemq-predefined-rendition-executable</artifactId>
+    <artifactId>promena-file-activemq-transformer-rendition-predefined-executable</artifactId>
     <version>1.0.0</version>
 
     <properties>
@@ -31,8 +31,9 @@
         <promena-connector-activemq.version>1.0.1</promena-connector-activemq.version>
 
         <!-- Put TRANSFORMERS versions here -->
-        <converter-imagemagick.version>1.0.0</converter-imagemagick.version>
-        <converter-libreoffice.version>1.0.1</converter-libreoffice.version>
+        <converter-imagemagick.version>1.0.1</converter-imagemagick.version>
+        <converter-libreoffice.version>1.0.2</converter-libreoffice.version>
+        <converter-pdfbox.version>1.0.0</converter-pdfbox.version>
         <!-- /Put -->
 
         <promena-docker-maven-plugin.version>1.0.0</promena-docker-maven-plugin.version>
@@ -96,6 +97,11 @@
             <groupId>pl.beone.promena.transformer</groupId>
             <artifactId>converter-libreoffice-configuration</artifactId>
             <version>${converter-libreoffice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.beone.promena.transformer</groupId>
+            <artifactId>converter-pdfbox-configuration</artifactId>
+            <version>${converter-pdfbox.version}</version>
         </dependency>
         <!-- /Put -->
     </dependencies>
@@ -184,6 +190,11 @@
                         <groupId>pl.beone.promena.transformer</groupId>
                         <artifactId>converter-libreoffice</artifactId>
                         <version>${converter-libreoffice.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>pl.beone.promena.transformer</groupId>
+                        <artifactId>converter-pdfbox</artifactId>
+                        <version>${converter-pdfbox.version}</version>
                     </dependency>
                     <!-- /Put -->
                 </dependencies>

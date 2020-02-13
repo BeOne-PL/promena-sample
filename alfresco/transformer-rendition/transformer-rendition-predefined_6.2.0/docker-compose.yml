@@ -69,7 +69,7 @@ services:
       - activemq-data:/opt/activemq/data
 
   promena:
-    image: promena-file-activemq-predefined-rendition-executable:1.0.0
+    image: promena-file-activemq-transformer-rendition-predefined-executable:1.0.0
     mem_limit: 2g
     environment:
       - communication.file.internal.directory.path=/tmp/promena-communication
@@ -80,6 +80,8 @@ services:
       - transformer.pl.beone.promena.transformer.converter.libreoffice.LibreOfficeConverterTransformer.actors=4
       - transformer.pl.beone.promena.transformer.converter.imagemagick.ImageMagickConverterTransformer.priority=2
       - transformer.pl.beone.promena.transformer.converter.imagemagick.ImageMagickConverterTransformer.actors=4
+      - transformer.pl.beone.promena.transformer.converter.pdfbox.PdfBoxConverterTransformer.priority=3
+      - transformer.pl.beone.promena.transformer.converter.pdfbox.PdfBoxConverterTransformer.actors=4
     volumes:
       - promena-communication:/tmp/promena-communication
 
